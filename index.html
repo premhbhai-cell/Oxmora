@@ -1,0 +1,30 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Oxmora toys and gifts, Ludhiana, Punjab"><title>Oxmora | Toys & Gifts</title><link rel="stylesheet" href="styles.css"></head><body>
+<div class="topbar"></div><header class="header"></header>
+<section class="hero2"><div class="wrap hero2-in"><div><h1>OXMORA</h1><div class="sub">PLAY • LEARN • GROW</div><h2>Make Playtime Special</h2><p>Colourful toys, cars, sets and gifts — chosen for happy little hands.</p><a class="btn gold" href="products.html">Shop Now →</a> <a class="btn light" target="_blank" rel="noopener" href="https://wa.me/919839991773">Ask on WhatsApp</a></div><div class="collage" id="collage"></div></div>
+<div class="herobar"><div class="wrap"><div><span>★</span> PREMIUM QUALITY</div><div><span>★</span> FUN DESIGNS</div><div><span>★</span> GREAT GIFTS</div><div><span>★</span> TRUSTED SERVICE</div><div><span>➜</span> DISCOVER YOUR PERFECT TOY</div></div></div></section>
+<main class="wrap" style="padding-top:22px">
+<section class="box" id="featured"><div class="sh center"><h2>Featured Products</h2><a href="products.html">View All →</a></div><div class="hs" id="feat"></div></section>
+<section class="box"><div class="sh"><h2>Categories</h2><a href="products.html">View All →</a></div><div class="cats" id="cats"></div></section>
+<div class="banner" id="b1"></div>
+<section class="dl"><div class="deal" id="deal"></div><div class="box" style="margin:0"><div class="sh"><h2>Latest Products</h2><a href="products.html">View All →</a></div><div class="g4" id="latest"></div></div></section>
+<div class="two"><div class="banner sm" id="b2"></div><div class="banner sm dark" id="b3"></div></div>
+<div id="rows" style="margin-top:18px"></div>
+<div class="trust2"><div><b>🚚</b>Fast delivery across the country</div><div><b>🔒</b>Safe payment</div><div><b>🔄</b>Easy support on orders</div><div><b>✅</b>Genuine products</div></div>
+<section class="box" id="reviews"><div class="sh"><h2>What Our Customers Say</h2></div><div id="rvlist"></div></section>
+</main><footer class="footer"></footer>
+<script src="products.js"></script><script src="store.js"></script>
+<script>
+window.initPage=()=>{const P=OXMORA_PRODUCTS,$=i=>document.getElementById(i),cs=[...new Set(P.map(p=>p.category))],first=c=>P.find(p=>p.category===c);
+$('collage').innerHTML=[P[0],P[19],P[40]].map(p=>`<img src="${p.image}" alt="${esc(p.name)}">`).join('');
+$('feat').innerHTML=P.slice(0,6).map(productCard).join('');
+$('cats').innerHTML=cs.map(c=>`<a class="cat2" href="products.html?category=${encodeURIComponent(c)}"><img src="${first(c).image}" alt="${esc(c)}">${esc(c)}</a>`).join('');
+const bn=(id,t,s,img,l)=>$(id).innerHTML=`<div><h2>${t}</h2><p>${s}</p><a class="btn gold" href="${l}">Shop Now</a></div><img src="${img}" alt="">`;
+bn('b1','PLAY. LEARN. GROW.','Toys, cars, colour sets and more from Oxmora.',P[4].image,'products.html');
+bn('b2','NEW ARRIVALS','Fresh picks for kids',P[30].image,'products.html');
+bn('b3','BEST OFFERS','Save on selected toys',P[50].image,'products.html?sort=disc');
+const d=P[4];$('deal').innerHTML=`<h2>DEAL OF THE DAY</h2><a href="product.html?id=${d.id}"><img src="${d.image}" alt="${esc(d.name)}"></a><h3 style="font-size:14px">${d.id} - ${esc(d.name)}</h3><div class="offer"><div><span>Original Price</span><s>${money(d.oldPrice)}</s></div><div><span>Discount</span><b style="color:#d6336c">${disc(d)}% OFF</b></div><div><span>Offer Price</span><b>${money(d.price)}</b></div><div class="save">You Save ${money(d.oldPrice-d.price)}</div></div><div class="timer" id="tm"></div><button class="buy" onclick="addToCart('${d.id}');location.href='checkout.html'">BUY NOW</button>`;
+const tick=()=>{const n=new Date(),e=new Date(n);e.setHours(24,0,0,0);const s=Math.floor((e-n)/1e3),f=x=>String(x).padStart(2,'0');$('tm').textContent='⏱ Ends in '+f(s/3600|0)+':'+f(s/60%60|0)+':'+f(s%60)};tick();setInterval(tick,1000);
+$('latest').innerHTML=P.slice(6,16).map(productCard).join('');
+$('rows').innerHTML=['Alphabet','Colour Set','Big Stunt Car'].map(c=>`<section class="box"><div class="sh"><h2>${c.toUpperCase()}</h2><a href="products.html?category=${encodeURIComponent(c)}">View All →</a></div><div class="hs">${P.filter(p=>p.category===c).slice(0,6).map(productCard).join('')}</div></section>`).join('');
+const rs=getReviews().slice(0,6);$('rvlist').innerHTML=rs.length?`<div class="rv-grid">${rs.map(r=>{const p=findProduct(r.id);return `<div class="rv">${stars(r.rating)}<p>${esc(r.text)}</p><div class="who"><b>${esc(r.name)}</b>${p?`<a href="product.html?id=${p.id}">${esc(p.name)}</a>`:''}</div></div>`}).join('')}</div>`:`<div class="empty">Abhi koi review nahi hai. Kisi bhi product page par jaakar pehla review likhiye.<br><br><a class="btn gold" href="product.html?id=${P[0].id}#rv">Write a review</a></div>`}
+</script></body></html>
